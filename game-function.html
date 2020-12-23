@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>untitled</title>
+        <style>html{
+            background-color: #444;
+        }
+        p{color: #ddb}</style>
+    </head>
+    <body>
+        <script>
+                let computerHand; 
+                let winsCPU;
+                let winsPlayer;
+                let actualInput;
+                let roundcounter;
+                                                                            //yep the win/lose scenarios were here, broken.
+            function computerPlay(){
+                //let a variable to store the computer's hand --- actually I left it outside so playRound could access it
+                //pick randomly from rock paper or scissors, make it the variable
+                let RPS = ["rock", "paper", "scissors"];
+                computerHand = RPS[Math.floor(Math.random()*RPS.length)];
+                //return the variable
+                return computerHand; //if only I didn't have to google that math bit sadkek
+
+            }
+            function playRound(){ //define function lol
+            computerPlay();
+            if (roundcounter) {playerInput = window.prompt(`Round ${roundcounter}!`)}
+            else              {playerInput = window.prompt("Rock, paper or scissors? No guns allowed.");}
+                actualInput = playerInput.toLowerCase(); //make it case insensitive
+                let tie = "tied. the computer also played " + computerHand + ".";
+                let win = "you win. " + actualInput + " beats the computer's " + computerHand + ".";
+                let lose = "you lose. computer's " + computerHand + " beats " + actualInput + "."; //they're here now!!!!!! amazeing!!!!!!!!!
+                function winFunc(){winsPlayer = winsPlayer++; return win;}; //add a win to whoever won, display the win/lose dialogue to the player
+                function loseFunc(){winsCPU = winsCPU++; return lose;};
+                function tieFunc(){return tie};
+                //check if it really is rock paper or scissors -- player loses the round if it's not
+                if (actualInput !== "rock" && actualInput !== "paper" && actualInput !== "scissors") 
+                {   winsCPU += 1;
+                    return "you lose. play an actual hand."}
+                else
+                //big if else for the computer's hand.
+                if (actualInput == "rock")
+                {
+                    if (computerHand == "rock") {return tie}
+                    else if (computerHand == "scissors") {winsPlayer += 1; return win}
+                    else {winsCPU += 1; return lose}
+                }
+                else if (actualInput == "paper")
+                {
+                    if (computerHand == "paper") {return tie}
+                    else if (computerHand == "rock") {winsPlayer += 1; return win}
+                    else  {winsCPU += 1; return lose}
+                }
+                else 
+                {
+                    if (computerHand == "scissors") {return tie}
+                    if (computerHand == "paper") {winsPlayer += 1; return win}
+                    else {winsCPU += 1; return lose}
+                }
+            }
+            function game(){
+                //(re?)set the win counters
+                winsCPU = 0;
+                winsPlayer = 0;
+                //firstly gonna have to change playerInput to a prompt -- done!
+                //change the win/lose results to increment the counter of whoever won -- done! added funcWin, funcLose and funcTie to do that.
+                                //do five games
+                function displayScore(){console.log(`you: ${winsPlayer}. CPU: ${winsCPU}`)} //well it looks nicer in function form than typing it out 5 times so
+                roundcounter = 1; playRound(); displayScore();
+                roundcounter = 2; playRound(); displayScore();
+                roundcounter = 3; playRound(); displayScore();
+                roundcounter = 4; playRound(); displayScore();
+                roundcounter = 5; playRound(); displayScore();
+
+                //and fucking pray it doesn't break.
+                if (winsCPU == winsPlayer) return "tie game."
+                else if (winsCPU > winsPlayer) return "you lose."
+                else return "you're winner!!!!!"
+                //check for tie, then who's counter is higher-- announce the winner (or not lmao)
+            }
+        </script>
+    <p>the intention was to make it gray so it wouldn't burn your retinas out but you'll be playing it in the console anyways so it doesn't really matter.</p>
+    <p>open up the console and type playRound() or game() for 5 rounds.</p>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>untitled</title>
+        <style>html{
+            background-color: #444;
+        }
+        p{color: #ddb}</style>
+    </head>
+    <body>
+        <script>
+                let computerHand;            
+            function computerPlay(){
+                //let a variable to store the computer's hand --- actually I left it outside so playRound could access it
+                //pick randomly from rock paper or scissors, make it the variable
+                let RPS = ["rock", "paper", "scissors"];
+                computerHand = RPS[Math.floor(Math.random()*RPS.length)];
+                //return the variable
+                return computerHand; //if only I didn't have to google that math bit sadkek
+                //also remember it's computerPlay() in console you fucking dweeb
+                //the dweeb being me, i'm not trying to insult someone who isn't a fucking dweeb here
+            }
+            function playRound(playerInput){ //define function lol
+            computerPlay();
+                let actualInput = playerInput.toLowerCase(); //make it case insensitive
+                //check if it really is rock paper or scissors -- player loses the round if it's not ("play by the rules, please")
+                let tie = `tied. the computer also played ${computerHand}.`;
+                let win = `you win. ${actualInput} beats the computer's ${computerHand}.`;
+                let lose = `you lose. computer's ${computerHand} beats ${actualInput}.`; //yep just making sure the win/lose scenarios are here.
+                if (actualInput == "gun") return "you're winner!!!!!" 
+                else if (actualInput !== "rock" && actualInput !== "paper" && actualInput !== "scissors") {return "play an actual hand. no, gun does not count."}
+                else
+                //do a big if else for the computer's hand.
+                if (actualInput == "rock") {
+                    if (computerHand == "rock") return tie ;
+                    else if (computerHand == "scissors") return win;
+                    else return lose; 
+                }
+                else if (actualInput == "paper"){
+                    if (computerHand == "paper") return tie;
+                    else if (computerHand == "rock") return win;
+                    else return lose;
+                }
+                else {
+                    if (computerHand == "scissors") return tie;
+                    if (computerHand == "paper") return win;
+                    else return lose;
+                }
+                //if player wins, "congrats, playerInput(or actualInput??) beats computerHand", if not, the opposite (but without congrats) (duh.)
+            }
+        </script>
+    <p>the intention was to make it gray so it wouldn't burn your retinas out but you'll be playing it in the console anyways so it doesn't really matter.</p>
+    </body>
+</html>
